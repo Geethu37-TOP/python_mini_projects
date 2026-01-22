@@ -1,0 +1,19 @@
+class OrderBook:
+    def __init__(self):
+        # We use dictionaries for O(1) lookup speed - very important for HFT!
+        self.buy_orders = {} 
+        self.sell_orders = {}
+
+    def add_order(self, side, price, volume):
+        """Adds or updates an order in the book."""
+        if side.lower() == "buy":
+            self.buy_orders[price] = self.buy_orders.get(price, 0) + volume
+        elif side.lower() == "sell":
+            self.sell_orders[price] = self.sell_orders.get(price, 0) + volume
+        print(f"Added {volume} units to {side} at ${price}")
+
+# Example of how it works
+if __name__ == "__main__":
+    market = OrderBook()
+    market.add_order("buy", 150.00, 50)
+    market.add_order("sell", 150.10, 30)
